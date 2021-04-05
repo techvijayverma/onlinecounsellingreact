@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -24,15 +25,15 @@ const Header=(props)=>{
 return(
     <div>
       <Navbar color="primary" light expand="md">
-        <NavbarBrand href="/">SOCS</NavbarBrand>
+        <NavbarBrand href="/">ACCS</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/usersection/register">User Portal</NavLink>
+              <NavLink href="/userportal">User Portal</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Resources</NavLink>
+              <NavLink href="https://collegegrad.com/careers/all">Resources</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
@@ -40,14 +41,15 @@ return(
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>
-                  Students(9-10the class)
+                      <Link className="list-group-item list-group-item-action" tag="a" to="/tenthstudents" action>Students(9-10the class)</Link>
+                  
                 </DropdownItem>
                 <DropdownItem>
-                  Students(11-12th class)
+                <Link className="list-group-item list-group-item-action" tag="a" to="/twelthstudents" action>Students(11-12th class)</Link>
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
-                  Reset
+                      General Information
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

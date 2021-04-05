@@ -67,7 +67,7 @@ const HomeBody=(props)=>
   });
 
   return (
-    <div>
+    <div className="carousel">
       <style>
         {
           `.custom-tag {

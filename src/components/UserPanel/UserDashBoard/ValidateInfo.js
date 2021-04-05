@@ -1,7 +1,7 @@
 const ValidateInfo=(values)=>{
 
     let errors={};
-    if(!values.username.trim()){
+    if(!values.username){
         errors.username="Username is required";
     }
     if(!values.password){

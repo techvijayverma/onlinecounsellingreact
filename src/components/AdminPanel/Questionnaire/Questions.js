@@ -14,7 +14,6 @@ const getAllQuestionsFromServer=()=>{
     axios.get(`${base_url}/question/allquestions`).then(
         (response)=>{
                 console.log(response);
-                toast.success("All Questions are loaded")
                 setQuestions(response.data)
         },
         (error)=>{
@@ -36,8 +35,8 @@ useEffect(()=>{
     }
     return(
         <div>
-            <h1>Attempt all Questions</h1>
-            <p>Let help us to help you</p>
+            <h1>List of all questions in the database</h1>
+            
             {
                 questions.length>0?questions.map((item)=>{return(
                     <Question question={item} update={updateQuestions}/>);

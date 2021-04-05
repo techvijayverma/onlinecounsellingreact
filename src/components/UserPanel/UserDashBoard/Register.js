@@ -4,17 +4,28 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import { Container, Form, FormGroup, Input, Label,Button } from 'reactstrap';
-import base_url from '../../../Api/BootApi'
+import base_url from '../../../Api/BootApi';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register=()=>{
-
+    const[user,setUser]=useState({
+        userType:"student"
+    });
     const[isSubmitted,setIsSubmitted]=useState(false);
-    const handleForm=(e)=>{
-        console.log(user);
-        postDataToServer(user);
-        toast("Registered successfully");
-        alert("Registered successfully");
-        e.preventDefault();
+    const handleSubmit=(e)=>{
+        if(user.password!==user.cpassword){
+            toast.warning("Confirm password doesn't match");
+        }
+        else
+        {
+            console.log(user);
+            postDataToServer(user);
+            toast.success("Registered successfully");
+            alert("Registered successfully");
+            localStorage.clear();
+            e.preventDefault();
+        }
+       
     }
 
     const postDataToServer=(data)=>{
@@ -22,21 +33,21 @@ const Register=()=>{
         .then((response)=>{console.log("User added");
         console.log(response.data)
         setIsSubmitted(response.data);
-        <Redirect to="/login"/>
         },error=>{
             console.log("Something went wrong"+error);
         }
         )
     }
-    const[user,setUser]=useState({});
+    
     if(isSubmitted){
-            return <Redirect to="/login" /> 
+            return (<div><Redirect to="/login" /> 
+            <ToastContainer position="top-center"/></div>);
          }
 
     return(
         <Fragment>
                 <h4 className="text-center my-3">Please fill the information to get started</h4>
-                <Form onSubmit={handleForm}>
+                <Form className="register">
                 <FormGroup>
                     <Label for="username">Username</Label>
                     <Input type="text" placeholder="Enter your username here" name="username" id="username" onChange={(e)=>{setUser({...user,username:e.target.value})}} required/>
@@ -49,22 +60,32 @@ const Register=()=>{
                 </FormGroup>
                 <FormGroup>
                     <Label for="cpassword">Confirm Password</Label>
-                    <Input type="password" placeholder="Re-enter your password here" name="cpassword" required />
+                    <Input type="password" placeholder="Re-enter your password here" name="cpassword" onChange={(e)=>{setUser({...user,cpassword:e.target.value})}} required />
                    
                 </FormGroup>
                 <FormGroup>
                     <Label for="email">Email</Label>
                     <Input type="email" placeholder="Enter your email here" name="email" id="email " onChange={(e)=>{setUser({...user,email:e.target.value})}} required/>
-                   
+                           
+                </FormGroup>
+
+                <FormGroup>
+                    <Input className="my-4" type="select" onInvalid="alert('You must fill out the form!');" onChange={(e)=>{setUser({...user,userType:e.target.value})}} required>
+                        <option value="student">Student</option>
+                        <option value="counsellor">Counsellor</option>
+                       
+                    </Input>
                 </FormGroup>
                 <Container className="text-center">
-                    <Button color="primary" type="submit" >Register</Button>
-                    <Button color="success ml-3" >Cancel</Button>
+                    <Button color="primary" onClick={handleSubmit} className="registerButton" >Register</Button>                    
                 </Container>
                 </Form>
                 <hr/>
-          <h7>Already Registered? Click here to <Link to="/login">Login</Link></h7>
-          <ToastContainer/>
+                <div className="alignCenter">
+                     <h7>Already Registered? Click here to <Link to="/login">Login</Link></h7>
+                </div>
+          
+          <ToastContainer position="top-center"/>
         </Fragment>
     );
 }

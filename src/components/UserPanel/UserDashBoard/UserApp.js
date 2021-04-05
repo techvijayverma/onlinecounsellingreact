@@ -10,17 +10,21 @@ import Profile from './Profile';
 import Reports from './Reports';
 import FAQ from './FAQ';
 import QuestionStudentApp from '../QuestionControl/QuestionStudentApp';
+import QuestionApp from '../../AdminPanel/Questionnaire/QuestionApp';
+import CounsellorDashBoard from '../../CounsellorPanel/CounsellorDashBoard';
+import ListCounsellor from './ListCounsellor';
 
 const UserApp=()=>{
     return(
         <div>
                 <Router>
-                        <Container>
+                        <Container fluid>
                             <Row>
-                                <Col md={4}>
+                                <Col md={3}>
                                     <MenuUser/>
                                 </Col>
-                                <Col md={8}>
+                                
+                                <Col md={9}>
                                         <Route path="/login" component={Login} exact/>
                                         <Route path="/usersection/register" component={Register} />
                                         <Route path="/changepassword" component={ChangePassword} exact/>
@@ -29,7 +33,9 @@ const UserApp=()=>{
                                         <Route path="/reports" component={Reports} exact/>
                                         <Route path="/faq" component={FAQ} exact/>
                                         <Route exact path="/questionstudentapp" component={QuestionStudentApp}/>
-                                        
+                                        <Route exact path="/questionapp" component={QuestionApp}/>
+                                        <Route exact path="/counsellordashboard" component={CounsellorDashBoard}/>
+                                        <Route path="/listcounsellor" component={ListCounsellor} exact/>
                                         
                                 </Col>
                             </Row>

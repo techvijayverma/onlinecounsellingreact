@@ -3,26 +3,21 @@ import {BrowserRouter as Router,Route} from 'react-router-dom'
 import { Col, Container, Row } from 'reactstrap';
 import AddQuestion from './AddQuestion'
 import Questions from './Questions'
-import EditQuestion from './EditQuestion';
-import DeleteQuestion from './DeleteQuestion';
 import MenuQuestion from './MenuQuestion';
+import ListCounsellor from '../../UserPanel/UserDashBoard/ListCounsellor';
+import ListStudents from '../../CounsellorPanel/ListStudents';
 const QuestionApp=()=>{
     return(
         <div>
                 <Router>
-                        <Container>
-                            <Row>
-                                <Col md={4}>
-                                    <MenuQuestion/>
-                                </Col>
-                                <Col md={8}>
-                                        <Route path="/addquestion" component={AddQuestion} />
-                                        <Route path="/questionnaire" component={Questions} exact/>
-                                        <Route path="/editquestion" component={EditQuestion} exact/>
-                                        <Route path="/deletequestion" component={DeleteQuestion} exact/>
-                                </Col>
-                            </Row>
-                        </Container>
+                    <div>
+                            <MenuQuestion/>
+                    </div>
+                        <Route path="/addquestion" component={AddQuestion} />
+                        <Route path="/questionnaire" component={Questions} exact/>
+                        <Route path="/liststudents" component={ListStudents} exact/>
+                        <Route path="/listcounsellors" component={ListCounsellor} exact/>
+                               
                 </Router>
         </div>
     );

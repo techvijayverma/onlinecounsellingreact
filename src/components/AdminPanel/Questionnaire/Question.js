@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
-import base_url from '../../../Api/BootApi'
+import base_url from '../../../Api/BootApi';
+import EditQuestion from './EditQuestion';
 import {
     Card, CardText, CardBody, CardSubtitle,Button,Container, Form, FormGroup, Input, Label
   } from 'reactstrap';
@@ -8,6 +9,13 @@ import {
 
 const Question=({question,update})=>{
     console.log(question);
+
+    const updateQuestion=(questNo)=>{
+        return(<div>
+            <EditQuestion name={questNo}/>
+        </div>);
+
+    }
     const deleteQuestion=(questNo)=>{
         axios.get(`${base_url}/question/deletequestion/${questNo}`).then(
             (response)=>{
@@ -57,7 +65,7 @@ const Question=({question,update})=>{
                 </CardText>
                 <Container className="text-center">
                     <Button color="danger" onClick={()=>{deleteQuestion(question.questNo);}}>Delete</Button>
-                    <Button color="warning ml-5">Update</Button>
+                    <Button color="warning ml-5 " onClick={updateQuestion(question.questNo)}>Update</Button>
                 </Container>
             </Form>
             </CardBody>

@@ -1,10 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import { UserStateContext } from '../../../UserContext';
+import Home from '../../StaticPages/Home';
+
 
 const Logout=()=>{
-    useEffect(()=>localStorage.clear());
+
+    const { username,setUsername } = useContext(UserStateContext);
+    useEffect(()=>
+    {
+        
+        localStorage.clear();
+        
+        if(username)
+        {
+            toast.success("Logged out successfully",{position:"top-center"});
+            setUsername("");
+        }
+        
+        
+    });
+
+    
     return(
         <div>
-            <h3>You are successfully logged out</h3>
+            <ToastContainer/>
+            <Home/>
+            <div className="alignCenter">
+                    You are successfully logged out
+            </div>
+            
         </div>
     );
 }
